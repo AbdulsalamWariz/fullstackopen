@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant UserBrowser
+    participant BackendServer
+
+    Note right of UserBrowser: User types a note and clicks submit
+
+    UserBrowser->>BackendServer: POST /new_note (with note data)
+    activate BackendServer
+    BackendServer-->>UserBrowser: HTTP 302 Redirect to /notes
+    deactivate BackendServer
+
+    Note right of UserBrowser: Browser automatically follows redirect
+
+    UserBrowser->>BackendServer: GET /notes
+    BackendServer-->>UserBrowser: HTML page
+
+    UserBrowser->>BackendServer: GET /main.css
+    BackendServer-->>UserBrowser: CSS file
+
+    UserBrowser->>BackendServer: GET /main.js
+    BackendServer-->>UserBrowser: JavaScript file
+
+    Note right of UserBrowser: JS runs and fetches notes
+
+    UserBrowser->>BackendServer: GET /data.json
+    BackendServer-->>UserBrowser: Updated note list
+
+    Note right of UserBrowser: JS displays all notes including the new one

@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant SPA_Browser
+    participant Server
+
+    SPA_Browser->>Server: GET /spa
+    Server-->>SPA_Browser: HTML shell
+
+    SPA_Browser->>Server: GET /main.css
+    Server-->>SPA_Browser: CSS content
+
+    SPA_Browser->>Server: GET /spa.js
+    Server-->>SPA_Browser: JavaScript SPA logic
+
+    Note right of SPA_Browser: JavaScript runs and handles frontend behavior
+
+    SPA_Browser->>Server: GET /data.json
+    Server-->>SPA_Browser: Notes in JSON format
+
+    Note right of SPA_Browser: Notes rendered without full page reload

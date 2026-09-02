@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant SPAClient
+    participant APIServer
+
+    Note right of SPAClient: User adds a note and hits Save
+
+    Note right of SPAClient: JS intercepts form and handles submission
+
+    SPAClient->>APIServer: POST /new_note_spa with JSON body
+    activate APIServer
+    APIServer-->>SPAClient: Success response (e.g. 201 Created)
+    deactivate APIServer
+
+    Note right of SPAClient: JavaScript appends the new note to the displayed list
+
+    Note right of SPAClient: No page refresh happens
