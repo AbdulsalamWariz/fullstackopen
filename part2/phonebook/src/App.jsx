@@ -19,7 +19,7 @@ const App = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    personService.getAll().then(initaialPersons => setPersons(initaialPersons))
+    personService.getAll().then(initialPersons => setPersons(initialPersons))
   }, [])
 
   const handleSubmit = event => {
@@ -80,10 +80,12 @@ const App = () => {
   )
 
   const handleDelete = (name, id) => {
+    console.log(persons)
     if (window.confirm(`Delete ${name}?`)) {
       personService.remove(id).then(deletedObject => {
         let filtered = persons.filter(p => p.id !== id)
         setPersons(filtered)
+        console.log(filtered)
       })
     } else {
       return
