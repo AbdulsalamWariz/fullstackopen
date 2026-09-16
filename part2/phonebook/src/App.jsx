@@ -41,6 +41,8 @@ const App = () => {
     personService.addPerson(newContact).then(returnedPerson => {
       setPersons(persons.concat(returnedPerson))
       notify("success", "Added", returnedPerson.name)
+    }).catch(error => {
+      setError(error.response.data.error)
     })
   }
 
