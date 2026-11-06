@@ -13,6 +13,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "dev-test": "cross-env NODE_ENV=test node --watch index.js",
     "test": "cross-env  NODE_ENV=test node --test",
     "lint": "eslint ."
   },
@@ -21,6 +22,10 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.10.0",
+    "globals": "^17.12.0",
     "supertest": "^7.3.0"
   }
 }

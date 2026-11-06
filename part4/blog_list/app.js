@@ -1,10 +1,10 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const blogsRouter = require('./controller/blogs')
 const config = require('./utils/config')
-const logger = require('./utils/logger')
-
+const express = require('express')
 const app = express()
+const blogsRouter = require('./controller/blogs')
+const middleware = require('./utils/middleware')
+const logger = require('./utils/logger')
+const mongoose = require('mongoose')
 
 logger.info('connecting to', config.MONGODB_URI)
 
@@ -16,8 +16,12 @@ mongoose
   .catch(error => {
     logger.error('error connection to MongoDB:', error.message)
   })
-
 app.use(express.json())
+app.use(middleware.requestLogger)
+
 app.use('/api/blogs', blogsRouter)
+
+app.use(middleware.unknownEndpoint)
+app.use(middleware.errorHandler)
 
 module.exports = app
