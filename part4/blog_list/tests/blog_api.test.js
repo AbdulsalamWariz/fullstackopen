@@ -62,3 +62,22 @@ test('Missing Title responds with 400 Bad Request', async () => {
 test('Missing URL responds with 400 Bad Request', async () => {
   await api.post(url).send(helper.missingUrlBlog).expect(400)
 })
+
+test('HTTP DELETE request to the /api/blogs/:id URL works', async () => {
+  let id = await helper.blogsInDb()
+  id = id[0].id
+  await api.delete(`${url}/${id}`).expect(204)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length - 1)
+})
+
+test.only('HTTP PUT request to the /api/blogs/:id URL works', async () => {
+  const id = (await helper.blogsInDb())[0].id
+
+  await api.put(`${url}/${id}`).send({ likes: 10 }).expect(204)
+
+  const [firstBlog] = await helper.blogsInDb()
+  assert.strictEqual(firstBlog.likes, 10)
+})

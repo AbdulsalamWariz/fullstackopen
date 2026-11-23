@@ -38,9 +38,15 @@ const missingUrlBlog = {
   likes: 74,
 }
 
+
 const blogsInDb = async () => {
   const blogs = await Blog.find({})
   return blogs.map(blog => blog.toJSON())
+}
+
+const blogId = async () => {
+  const blogs = blogsInDb
+  return blogs[0].id
 }
 
 module.exports = {
@@ -50,4 +56,5 @@ module.exports = {
   missingLikesBlog,
   missingTitleBlog,
   missingUrlBlog,
+  blogId,
 }
