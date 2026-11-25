@@ -38,7 +38,6 @@ const missingUrlBlog = {
   likes: 74,
 }
 
-
 const blogsInDb = async () => {
   const blogs = await Blog.find({})
   return blogs.map(blog => blog.toJSON())
